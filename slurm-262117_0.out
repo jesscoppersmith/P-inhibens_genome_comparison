@@ -1,0 +1,50 @@
+script started running at: 
+Sun Jun 11 20:32:49 EDT 2023
+Running on host:
+n063.cluster.com
+Currently Loaded Modulefiles:
+  1) GCCcore/11.2.0                    13) libfabric/1.13.2-GCCcore-11.2.0
+  2) zlib/.1.2.11-GCCcore-11.2.0       14) PMIx/4.1.0-GCCcore-11.2.0
+  3) binutils/.2.37-GCCcore-11.2.0     15) OpenMPI/4.1.1-GCC-11.2.0
+  4) GCC/11.2.0                        16) OpenBLAS/0.3.18-GCC-11.2.0
+  5) numactl/2.0.14-GCCcore-11.2.0     17) FlexiBLAS/3.0.4-GCC-11.2.0
+  6) XZ/.5.2.5-GCCcore-11.2.0          18) gompi/2021b
+  7) libxml2/.2.9.10-GCCcore-11.2.0    19) FFTW/3.3.10-gompi-2021b
+  8) libpciaccess/0.16-GCCcore-11.2.0  20) ScaLAPACK/2.1.0-gompi-2021b-fb
+  9) hwloc/.2.5.0-GCCcore-11.2.0       21) foss/2021b
+ 10) OpenSSL/1.1                       22) tbb/2021.4.0-GCCcore-11.2.0
+ 11) libevent/2.1.12-GCCcore-11.2.0    23) SibeliaZ/1.2.5-foss-2021b
+ 12) UCX/1.11.2-GCCcore-11.2.0
+stat: invalid option -- 'o'
+Try 'stat --help' for more information.
+/opt/software/SibeliaZ/1.2.5-foss-2021b/bin/sibeliaz: line 111: total_size + : syntax error: operand expected (error token is "+ ")
+Constructing the graph...
+PARSE ERROR: Argument: (--filtermemory)
+             Couldn't read argument value from string '-o'
+
+Brief USAGE: 
+   twopaco  {-f <integer>|--filtermemory <float>} [-o <file name>] [--test]
+            [--tmpdir <directory name>] [-a <integer>] [-t <integer>] [-r
+            <integer>] [-q <integer>] [-k <oddc>] [--] [--version] [-h]
+            <fasta files with genomes> ...
+
+For complete USAGE and HELP type: 
+   twopaco --help
+
+PARSE ERROR: Argument: -k (--kvalue)
+             Argument already set!
+
+Brief USAGE: 
+   sibeliaz-lcb  [--chunks <integer>] [--noseq] [-o <directory name>]
+                 --graph <file name> [-a <integer>] [-t <integer>] [-m
+                 <integer>] [-b <integer>] [-k <oddc>] [--] [--version]
+                 [-h] <fasta files with genomes> ...
+
+For complete USAGE and HELP type: 
+   sibeliaz-lcb --help
+
+rm: cannot remove ‘./sibeliaz_out/de_bruijn_graph.dbg’: No such file or directory
+	Reading GFF file
+Cannot open /home/jcoppersmith/data/src/phaeobacter_comparison_2023/sibeliaZ-out-a200/blocks_coords.gff
+script finished running at: 
+Sun Jun 11 20:32:50 EDT 2023
