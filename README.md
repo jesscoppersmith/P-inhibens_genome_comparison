@@ -1,7 +1,7 @@
-#Synteny analysis of Phaeobacter inhibens genomes
+# Synteny analysis of Phaeobacter inhibens genomes
 Using SibeliaZ, maf2synteny
 
-#Get Genomes from NCBI
+# Get Genomes from NCBI
 All Phaeobacter inhibens genomes were accessed from the S4Sm assembly page located here https://www.ncbi.nlm.nih.gov/genome/13044?genome_assembly_id=2187178 by clicking on RefSeq link for all related genomes
 
 ```bash
@@ -62,7 +62,7 @@ These genomes were used in the analysis
 |              P92 | Spain   |        4,479,935 |        GCA_002892025.1 |
 |             S4Sm | RI USA  |        4,385,166 |        GCA_030060455.1 |
 
-#Run SibeliaZ to create syntny blocks
+# Run SibeliaZ to create syntny blocks
 Order of flags is important and should be entered in this order
 
 [-k <odd integer>] [-b <integer>] [-m <integer>] [-a <integer>] [-t <integer>] [-f <integer>] [-o <output_directory>] [-n] <input file>
@@ -71,9 +71,30 @@ Order of flags is important and should be entered in this order
 sibeliaz -k 15  -a 201 -t $threads -n $INPUT_DIR/*
 ```
 
-#Run maf2synteny to align blocks from SibeliaZ output
+# Run maf2synteny to align blocks from SibeliaZ output
 ```bash
 maf2synteny sibeliaz_out/blocks_coords.gff
 ```
+# Re-run SibeliaZ with a higher -a interger
+Increasing the -a flag value to include a larger number of verticies. From the SibeliaZ page
+"SibeliaZ removes all k-mers with frequency more than a threshold, which is controlled by the option: -a <integer> We recommend setting it to twice the maximum number of copies of a homologous block the underlying input genome collection has."
 
-##Output
+D * N * 2 = a
+D=number of duplications
+N=number of genomes
+2=constant
+
+Following this equation, an -a of 201 would suggest duplications of a little over 2. To cover a larger range we increased that value to 2000, for a duplication rate of just shy of 25.
+
+```bash
+sibeliaz -k 15  -a 2000 -t $threads -n $INPUT_DIR/*
+```
+
+## Output
+SibeliaZ run with -a 201
+Blocks found: 7120
+Coverage: 0.98
+
+SibeliaZ run with -a 2000
+Blocks found: 7167
+Coverage: 0.98
