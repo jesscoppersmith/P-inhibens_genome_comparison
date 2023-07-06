@@ -1,0 +1,6 @@
+genome_name     problem_compared_with   dist
+GCF_002888685.1_ASM288868v1_genomic.fna GCF_000154765.2_ASM15476v2_genomic.fna  5.00789e-05
+GCF_000154745.2_ASM15474v2_genomic.fna  GCF_003443555.1_ASM344355v1_genomic.fna 7.14446e-06
+GCF_002892125.1_ASM289212v1_genomic.fna GCF_002892025.1_ASM289202v1_genomic.fna 0.0
+GCF_002892045.1_ASM289204v1_genomic.fna GCF_002892025.1_ASM289202v1_genomic.fna 0.0
+discarded-by-minhash-NA-0.0001_0.06.txt (END)

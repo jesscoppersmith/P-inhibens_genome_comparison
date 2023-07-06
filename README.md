@@ -98,3 +98,87 @@ Coverage: 0.98
 SibeliaZ run with -a 2000
 Blocks found: 7167
 Coverage: 0.98
+
+#Core Genome Analysis with PanACoTA
+
+##PanACoTA prepare
+Genomes were previously obtained from NCBI so filtering of genomes began at prepare step 2 as outlined
+https://aperrin.pages.pasteur.fr/pipeline_annotation/html-doc/usage.html#lfile
+
+```bash
+PanACoTA prepare --norefseq -o $OUT_DIR -d $DB_DIR
+```
+Where --norefseq indicates genomes have already been obtained
+-o is for naming directory where results will land, and PanACoTA will create this directory if it doesn't already exist
+-d path to the genomes for Analysis
+
+###output
+Genomes were analyzed for L90 and mash distance. Four genomes were excluded from further analysis due to high homology
+
+| genome_name                             | problem_compared_with                   | dist     |
+|-----------------------------------------|-----------------------------------------|----------|
+| GCF_002888685.1_ASM288868v1_genomic.fna | GCF_000154765.2_ASM15476v2_genomic.fna  | 5.01E-05 |
+| GCF_000154745.2_ASM15474v2_genomic.fna  | GCF_003443555.1_ASM344355v1_genomic.fna | 7.14E-06 |
+| GCF_002892125.1_ASM289212v1_genomic.fna | GCF_002892025.1_ASM289202v1_genomic.fna | 0        |
+| GCF_002892045.1_ASM289204v1_genomic.fna | GCF_002892025.1_ASM289202v1_genomic.fna | 0        |
+
+The resulting file, the info file, is used in downstream Analysis
+| to_annotate                                                                                                                                              | gsize   | nb_conts | L90 |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------|---------|----------|-----|
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025142795.1_ASM2514279v1_genomic.fna_prepare-split5N.fna | 4139108 | 3        | 1   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_000154765.2_ASM15476v2_genomic.fna_prepare-split5N.fna   | 4227134 | 4        | 1   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025142835.1_ASM2514283v1_genomic.fna_prepare-split5N.fna | 4089150 | 4        | 1   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025143405.1_ASM2514340v1_genomic.fna_prepare-split5N.fna | 4182712 | 4        | 1   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_002892165.1_ASM289216v1_genomic.fna_prepare-split5N.fna  | 4103784 | 4        | 1   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_003443555.1_ASM344355v1_genomic.fna_prepare-split5N.fna  | 4160913 | 4        | 1   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_003443575.1_ASM344357v1_genomic.fna_prepare-split5N.fna  | 4188145 | 4        | 1   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_030060455.1_ASM3006045v1_genomic.fna_prepare-split5N.fna | 4385166 | 4        | 1   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025142455.1_ASM2514245v1_genomic.fna_prepare-split5N.fna | 4178771 | 4        | 1   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025142675.1_ASM2514267v1_genomic.fna_prepare-split5N.fna | 4204626 | 4        | 1   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025142715.1_ASM2514271v1_genomic.fna_prepare-split5N.fna | 4163548 | 4        | 1   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025143215.1_ASM2514321v1_genomic.fna_prepare-split5N.fna | 4114628 | 4        | 1   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_002892265.1_ASM289226v1_genomic.fna_prepare-split5N.fna  | 4109120 | 4        | 1   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_002892005.1_ASM289200v1_genomic.fna_prepare-split5N.fna  | 4021447 | 5        | 1   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025143665.1_ASM2514366v1_genomic.fna_prepare-split5N.fna | 4202636 | 6        | 1   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025142595.1_ASM2514259v1_genomic.fna_prepare-split5N.fna | 4314694 | 5        | 2   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025142735.1_ASM2514273v1_genomic.fna_prepare-split5N.fna | 4244751 | 5        | 2   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025143105.1_ASM2514310v1_genomic.fna_prepare-split5N.fna | 4283941 | 5        | 2   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025142775.1_ASM2514277v1_genomic.fna_prepare-split5N.fna | 4314012 | 5        | 2   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_001969345.1_ASM196934v1_genomic.fna_prepare-split5N.fna  | 4291376 | 5        | 2   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025142695.1_ASM2514269v1_genomic.fna_prepare-split5N.fna | 4281685 | 5        | 2   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025142755.1_ASM2514275v1_genomic.fna_prepare-split5N.fna | 4301253 | 5        | 2   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025142815.1_ASM2514281v1_genomic.fna_prepare-split5N.fna | 4402211 | 5        | 2   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025142855.1_ASM2514285v1_genomic.fna_prepare-split5N.fna | 4301151 | 5        | 2   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025143325.1_ASM2514332v1_genomic.fna_prepare-split5N.fna | 4284518 | 5        | 2   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025143505.1_ASM2514350v1_genomic.fna_prepare-split5N.fna | 4266684 | 5        | 2   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_002892185.1_ASM289218v1_genomic.fna_prepare-split5N.fna  | 4248079 | 6        | 2   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_002892205.1_ASM289220v1_genomic.fna_prepare-split5N.fna  | 4320988 | 6        | 2   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_002891945.1_ASM289194v1_genomic.fna_prepare-split5N.fna  | 4429187 | 6        | 2   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_002891985.1_ASM289198v1_genomic.fna_prepare-split5N.fna  | 4124503 | 6        | 2   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_002891965.1_ASM289196v1_genomic.fna_prepare-split5N.fna  | 4268701 | 7        | 2   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_002892025.1_ASM289202v1_genomic.fna_prepare-split5N.fna  | 4479935 | 7        | 3   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_002891665.1_ASM289166v1_genomic.fna_prepare-split5N.fna  | 4398636 | 9        | 3   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_002892065.1_ASM289206v1_genomic.fna_prepare-split5N.fna  | 4777546 | 10       | 4   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_002892085.1_ASM289208v1_genomic.fna_prepare-split5N.fna  | 4844543 | 10       | 4   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_002892145.1_ASM289214v1_genomic.fna_prepare-split5N.fna  | 4695825 | 11       | 4   |
+| /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_002892225.1_ASM289222v1_genomic.fna_prepare-split5N.fna  | 4648923 | 11       | 4   |
+
+##PanACoTA Annotate QC
+Further QC analysis of the remaining genomes found no other concerns, and analysis continued with the remaining 37 genomes.
+
+```bash
+PanACoTA annotate --info $INFO_FILE -r $RESULTS_DIR -Q
+```
+Where --info indicates the output from the previous step
+-r is the directory where results will be writen
+-Q for quality only
+
+##PanACoTA annotate
+Annotation of the NCBI genomes with PROKKA for uniform Analysis
+
+```bash
+PanACoTA annotate --info $INFO_FILE -r $RESULTS_DIR -n PHIN
+```
+--info for the presorted files from initial QC
+-r where results should be writen to
+-n to give a four character alphanumeric name to the Genomes
