@@ -1,5 +1,5 @@
 # Synteny analysis of Phaeobacter inhibens genomes
-Using SibeliaZ, maf2synteny
+Using SibeliaZ, maf2synteny, PanACoTA
 
 # Get Genomes from NCBI
 All Phaeobacter inhibens genomes were accessed from the S4Sm assembly page located here https://www.ncbi.nlm.nih.gov/genome/13044?genome_assembly_id=2187178 by clicking on RefSeq link for all related genomes
