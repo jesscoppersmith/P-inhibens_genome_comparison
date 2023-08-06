@@ -99,9 +99,10 @@ SibeliaZ run with -a 2000
 Blocks found: 7167
 Coverage: 0.98
 
-#Core Genome Analysis with PanACoTA
+# Core Genome Analysis with PanACoTA
+Following the pipeline as described in detail https://aperrin.pages.pasteur.fr/pipeline_annotation/html-doc/usage.html#
 
-##PanACoTA prepare
+## PanACoTA prepare
 Genomes were previously obtained from NCBI so filtering of genomes began at prepare step 2 as outlined
 https://aperrin.pages.pasteur.fr/pipeline_annotation/html-doc/usage.html#lfile
 
@@ -112,7 +113,16 @@ Where --norefseq indicates genomes have already been obtained
 -o is for naming directory where results will land, and PanACoTA will create this directory if it doesn't already exist
 -d path to the genomes for Analysis
 
-###output
+### output
+Output from the prepare step, starting at step 2 (genomes already obtained) include a file named as
+LSTINFO-<datasetname>-filtered-<min_dist>_<max_dist>.lst
+
+This file contains the list of all genomes with 4 columns:
+  path to the genome sequence after ‘N’ splitting procedure
+  genome size (number of bases)
+  number of contigs in genome
+  L90 of genome
+
 Genomes were analyzed for L90 and mash distance. Four genomes were excluded from further analysis due to high homology
 
 | genome_name                             | problem_compared_with                   | dist     |
@@ -163,7 +173,7 @@ The resulting file, the info file, is used in downstream Analysis
 | /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_002892145.1_ASM289214v1_genomic.fna_prepare-split5N.fna  | 4695825 | 11       | 4   |
 | /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_002892225.1_ASM289222v1_genomic.fna_prepare-split5N.fna  | 4648923 | 11       | 4   |
 
-##PanACoTA Annotate QC
+## PanACoTA Annotate QC
 Further QC analysis of the remaining genomes found no other concerns, and analysis continued with the remaining 37 genomes.
 
 ```bash
@@ -173,7 +183,7 @@ Where --info indicates the output from the previous step
 -r is the directory where results will be writen
 -Q for quality only
 
-##PanACoTA annotate
+## PanACoTA annotate
 Annotation of the NCBI genomes with PROKKA for uniform Analysis
 
 ```bash
@@ -182,3 +192,61 @@ PanACoTA annotate --info $INFO_FILE -r $RESULTS_DIR -n PHIN
 --info for the presorted files from initial QC
 -r where results should be writen to
 -n to give a four character alphanumeric name to the Genomes
+
+## PanACoTA pangenome
+Constructs a pangenome file using a given list of genomes to include, and the protein files created in the annotate step. This step also outputs summary files, and a qulatitive and an quantative matrix. Qulatitive matrix can be used for GWAS analysis using treeWAS.
+
+```bash
+PanACoTA pangenome -l $LIST_FILE -n PHIN37 -d $DBDIR -o $OUT_DIR -i .8 --threads $THREADS
+```
+
+-l <list_file>: the file containing the list of genomes to include in the pangenome, as described in input formats
+n <dataset_name>: name you want to give to your dataset for which you are generating a pangenome. For example, ESCO200 if you are doing a pangenome of 200 E. coli strains
+-d <path/to/dbdir>: path to the <dbdir>, containing all .prt files.
+-o <path/to/outdir>: path to the directory where you want to put the pangenome results (and temporary files)
+-i <min_id>: minimum percentage of identity required to put 2 proteins in the same family. When doing a pangenome at the species level, we commonly use a threshold of 80% of identity.
+
+## PanACoTA corepers
+Core and Persistant genenomes are inferred from the pangenome output file.
+
+You can generate a core or persistent genome of a subset of the genomes used in the pangenome, you can give the list of those genomes in a file with -l lstinfo option. We'll do this later to look at probiotic strains versus the core genome as a whole.
+
+```bash
+PanACoTA corepers -p $PANGENOME -o $OUT_DIR
+```
+
+-p is the Pangenome file PanGenome-PHIN37.All.prt-clust-0.8-mode1-th16.lst
+-o specifies output output_directory
+
+output is a persistant genomefile in the same format as the pangenome file.
+
+## PanACoTA align
+Alignment of persistant families
+
+```bash
+PanACoTA align -c $PERS_GENOME -l $LIST_FILE -n PHIN37_0.9 -d $DB_DIR -o $OUT_DIR --threads $THREADS
+```
+
+-c <pers_genome>: persistent genome file whose families must be aligned from previous step
+-l <list_file>: list of all genomes, can be from the annotate step
+-n <dataset_name>: name of the dataset to align. For example, you can put ESCO200-0.9-mixed for the alignment of the mixed persistent genome of 200 E. coli strains, where mixed persistent genome was generated such that there are at least 90% of the genomes in each family.
+-d <dbdir>: directory containing the Proteins and Genes folders, with files corresponding to list_file
+-o <resdir>: directory where you want to have the temporary and result files
+
+Output from this step included a fasta formated file with one entry pergenome, the sequence of which is the concatenation of all persistent proteins that have been back translated into nucleotide using the gene files from the annotate step.
+
+## PanACoTA tree
+
+Infer a tree from the alignment file created in the previous step in Newick format.
+
+```bash
+PanACoTA tree -a $ALIGN_FILE -o $OUT_DIR --boot 1000 --threads $threads
+```
+
+-a alignment file from align step
+-o <resdir>: directory where you want to have the temporary and result files
+--boot number of bootstraps to compute, default is none
+
+Output tree file can be viewed using a number of tools, including http://etetoolkit.org/treeview/ as used to visualize this tree.
+
+![PhylogeneticTree](output/panacota/PHIN_Tree.png)
