@@ -125,14 +125,15 @@ This file contains the list of all genomes with 4 columns:
 
 Genomes were analyzed for L90 and mash distance. Four genomes were excluded from further analysis due to high homology
 
-| genome_name                             | problem_compared_with                   | dist     |
-|-----------------------------------------|-----------------------------------------|----------|
-| GCF_002888685.1_ASM288868v1_genomic.fna | GCF_000154765.2_ASM15476v2_genomic.fna  | 5.01E-05 |
-| GCF_000154745.2_ASM15474v2_genomic.fna  | GCF_003443555.1_ASM344355v1_genomic.fna | 7.14E-06 |
-| GCF_002892125.1_ASM289212v1_genomic.fna | GCF_002892025.1_ASM289202v1_genomic.fna | 0        |
-| GCF_002892045.1_ASM289204v1_genomic.fna | GCF_002892025.1_ASM289202v1_genomic.fna | 0        |
+| genome_name                              | strain_name | problem_compared_with                   | strain_name | dist     |
+|------------------------------------------|-------------|-----------------------------------------|-------------|----------|
+| GCF_002888685.1_ASM288868v1_genomic.fna  | P10         | GCF_000154765.2_ASM15476v2_genomic.fna  | DSM-17395   | 5.01E-05 |
+| GCF_000154745.2_ASM15474v2_genomic.fna   | 2.1         | GCF_003443555.1_ASM344355v1_genomic.fna | 2.10        | 7.14E-06 |
+| GCF_002892125.1_ASM289212v1_genomic.fna  | P70         | GCF_002892025.1_ASM289202v1_genomic.fna | P92         | 0        |
+| GCF_002892045.1_ASM289204v1_genomic.fna  | P74         | GCF_002892025.1_ASM289202v1_genomic.fna | P92         | 0        |
 
 The resulting file, the info file, is used in downstream Analysis
+
 | to_annotate                                                                                                                                              | gsize   | nb_conts | L90 |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------|---------|----------|-----|
 | /data/marine_diseases_lab/jessica/src/phaeobacter_comparison_2023/panacota/QC_out/tmp_files/GCF_025142795.1_ASM2514279v1_genomic.fna_prepare-split5N.fna | 4139108 | 3        | 1   |
@@ -235,9 +236,11 @@ PanACoTA align -c $PERS_GENOME -l $LIST_FILE -n PHIN37_0.9 -d $DB_DIR -o $OUT_DI
 
 Output from this step included a fasta formated file with one entry pergenome, the sequence of which is the concatenation of all persistent proteins that have been back translated into nucleotide using the gene files from the annotate step.
 
+To get strain names in the alignment file, in place of the PanACoTA created names, I duplicate the alignment file and utelized vi in the command line to replace them with their associated strain names.
+
 ## PanACoTA tree
 
-Infer a tree from the alignment file created in the previous step in Newick format.
+Infer a tree from the strain name containing alignment file created in the previous step in Newick format.
 
 ```bash
 PanACoTA tree -a $ALIGN_FILE -o $OUT_DIR --boot 1000 --threads $threads
@@ -250,3 +253,35 @@ PanACoTA tree -a $ALIGN_FILE -o $OUT_DIR --boot 1000 --threads $threads
 Output tree file can be viewed using a number of tools, including http://etetoolkit.org/treeview/ as used to visualize this tree.
 
 ![PhylogeneticTree](output/panacota/PHIN_Tree.png)
+
+## Rerun with subset of samples
+To compare those genomes of known probionts against the entire set of Phaeobacter inhibens genomes, we can subset the pangenome file to include just those genomes of interest.
+
+## Subset corepers
+
+```bash
+PanACoTA corepers -p $PANGENOME -o $OUT_DIR -l $LSTINFO
+```
+-p output from previous PANGENOME step
+-o <path/to/outdir>: path to the directory where you want to put the corepers results (and temporary files)
+-l lstinfo_file indicates a subset of the data to run corepers on instead of the whole pangenome genomes
+
+## Subset align
+
+```bash
+PanACoTA align -c $PERS_GENOME -l $LIST_FILE -n PHIN37_0.9 -d $DB_DIR -o $OUT_DIR --threads $THREADS
+```
+
+-c is the persistant genome file from the previous step
+-l is a list file containing an edited output file from the annotation step that contains only the genomes of interest
+
+## Create a tree
+
+```bash
+PanACoTA tree -a $ALIGN_FILE -o $OUT_DIR --boot 1000 --threads $threads
+```
+
+## Output
+Output tree file can be viewed using a number of tools, including http://etetoolkit.org/treeview/ as used to visualize this tree.
+
+![ProbiontPhylogeneticTree](output/panacota/Probiont_Subset_tree.png) 
