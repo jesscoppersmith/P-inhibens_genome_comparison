@@ -1,5 +1,5 @@
 # Synteny analysis of Phaeobacter inhibens genomes
-Using SibeliaZ, maf2synteny, PanACoTA
+Using SibeliaZ https://github.com/medvedevgroup/SibeliaZ, and PanACoTA https://doi.org/10.1093/nargab/lqaa106
 
 # Get Genomes from NCBI
 All Phaeobacter inhibens genomes were accessed from the S4Sm assembly page located here https://www.ncbi.nlm.nih.gov/genome/13044?genome_assembly_id=2187178 by clicking on RefSeq link for all related genomes
@@ -18,49 +18,50 @@ There are currently (5/2023) 44 submissions on NCBI for Phaeobacter inhibens gen
 
 ## Table of input genomes
 These genomes were used in the analysis
-| Strain           | Origin  | Total Length     | Assembly number        |
-|------------------|---------|------------------|------------------------|
-|              2.1 | unknown |        4,160,918 |        GCA_000154745.2 |
-|             2.10 | unknown |        4,160,913 |        GCA_003443555.1 |
-|            BS107 | unknown |        4,188,145 |        GCA_003443575.1 |
-|           DOK1-1 | Dokdo   |        4,291,376 |        GCA_001969345.1 |
-|        DSM 17395 | unknown |        4,227,134 |        GCA_000154765.2 |
-|             M619 | China   |        4,178,771 |        GCA_025142455.1 |
-|             M623 | China   |        4,314,694 |        GCA_025142595.1 |
-|             M624 | China   |        4,204,626 |        GCA_025142675.1 |
-|             M625 | China   |        4,281,685 |        GCA_025142695.1 |
-|             M626 | China   |        4,163,548 |        GCA_025142715.1 |
-|             M627 | China   |        4,244,751 |        GCA_025142735.1 |
-|             M628 | China   |        4,301,253 |        GCA_025142755.1 |
-|             M631 | China   |        4,314,012 |        GCA_025142775.1 |
-|             M632 | China   |        4,139,108 |        GCA_025142795.1 |
-|             M633 | China   |        4,402,211 |        GCA_025142815.1 |
-|             M634 | China   |        4,089,150 |        GCA_025142835.1 |
-|             M635 | China   |        4,301,151 |        GCA_025142855.1 |
-|             M636 | China   |        4,283,941 |        GCA_025143105.1 |
-|             M643 | China   |        4,114,628 |        GCA_025143215.1 |
-|             M644 | China   |        4,284,518 |        GCA_025143325.1 |
-|             M646 | China   |        4,182,712 |        GCA_025143405.1 |
-|             M647 | China   |        4,266,684 |        GCA_025143505.1 |
-|             M650 | China   |        4,202,636 |        GCA_025143665.1 |
-|              P10 | France  |        4,237,605 |        GCA_002888685.1 |
-|              P24 | Denmark |        4,398,636 |        GCA_002891665.1 |
-|              P30 | Denmark |        4,320,988 |        GCA_002892205.1 |
-|              P48 | Denmark |        4,109,120 |        GCA_002892265.1 |
-|              P51 | Denmark |        4,124,503 |        GCA_002891985.1 |
-|              P54 | Denmark |        4,248,079 |        GCA_002892185.1 |
-|              P57 | Denmark |        4,021,447 |        GCA_002892005.1 |
-|              P59 | Denmark |        4,103,784 |        GCA_002892165.1 |
-|              P66 | Spain   |        4,777,546 |        GCA_002892065.1 |
-|              P70 | Spain   |        4,479,933 |        GCA_002892125.1 |
-|              P72 | Spain   |        4,429,187 |        GCA_002891945.1 |
-|              P74 | Spain   |        4,481,611 |        GCA_002892045.1 |
-|              P78 | Spain   |        4,268,701 |        GCA_002891965.1 |
-|              P80 | Spain   |        4,695,825 |        GCA_002892145.1 |
-|              P83 | Spain   |        4,648,923 |        GCA_002892225.1 |
-|              P88 | Spain   |        4,844,543 |        GCA_002892085.1 |
-|              P92 | Spain   |        4,479,935 |        GCA_002892025.1 |
-|             S4Sm | RI USA  |        4,385,166 |        GCA_030060455.1 |
+
+| **Strain** | **Origin**  | **Total Length** | **Assembly number** | **Known Probiont** | **literature**                                                                                                                                                       |
+|------------|-------------|------------------|---------------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 2.1        | Australia   | 4,160,918        | GCA_000154745.2     | yes                | Phaeobacter   gallaeciensis genomes from globally opposite locations reveal high similarity   of adaptation to surface life                                          |
+| 2.10       | Australia   | 4,160,913        | GCA_003443555.1     | yes                |                                                                                                                                                                      |
+| BS107      | Spain       | 4,188,145        | GCA_003443575.1     | yes                | Protection   of cod larvae from vibriosis by Phaeobacter spp.: A comparison of strains and   introduction times                                                      |
+| DOK1-1     | South Korea | 4,291,376        | GCA_001969345.1     | no                 |                                                                                                                                                                      |
+| DSM-17395  | Spain       | 4,227,134        | GCA_000154765.2     | yes                | Phaeobacter   gallaeciensis Reduces Vibrio anguillarum in Cultures of Microalgae and   Rotifers, and Prevents Vibriosis in Cod Larvae                                |
+| M619       | China       | 4,178,771        | GCA_025142455.1     | no                 |        Anaerobic   thiosulfate oxidation by the Roseobacter group is prevalent in   marine biofilms                                                                  |
+| M623       | China       | 4,314,694        | GCA_025142595.1     | no                 |                                                                                                                                                                      |
+| M624       | China       | 4,204,626        | GCA_025142675.1     | no                 |                                                                                                                                                                      |
+| M625       | China       | 4,281,685        | GCA_025142695.1     | no                 |                                                                                                                                                                      |
+| M626       | China       | 4,163,548        | GCA_025142715.1     | no                 |                                                                                                                                                                      |
+| M627       | China       | 4,244,751        | GCA_025142735.1     | no                 |                                                                                                                                                                      |
+| M628       | China       | 4,301,253        | GCA_025142755.1     | no                 |                                                                                                                                                                      |
+| M631       | China       | 4,314,012        | GCA_025142775.1     | no                 |                                                                                                                                                                      |
+| M632       | China       | 4,139,108        | GCA_025142795.1     | no                 |                                                                                                                                                                      |
+| M633       | China       | 4,402,211        | GCA_025142815.1     | no                 |                                                                                                                                                                      |
+| M634       | China       | 4,089,150        | GCA_025142835.1     | no                 |                                                                                                                                                                      |
+| M635       | China       | 4,301,151        | GCA_025142855.1     | no                 |                                                                                                                                                                      |
+| M636       | China       | 4,283,941        | GCA_025143105.1     | no                 |                                                                                                                                                                      |
+| M643       | China       | 4,114,628        | GCA_025143215.1     | no                 |                                                                                                                                                                      |
+| M644       | China       | 4,284,518        | GCA_025143325.1     | no                 |                                                                                                                                                                      |
+| M646       | China       | 4,182,712        | GCA_025143405.1     | no                 |                                                                                                                                                                      |
+| M647       | China       | 4,266,684        | GCA_025143505.1     | no                 |                                                                                                                                                                      |
+| M650       | China       | 4,202,636        | GCA_025143665.1     | no                 |                                                                                                                                                                      |
+| P10        | France      | 4,237,605        | GCA_002888685.1     | no                 |                                                                                                                                                                      |
+| P24        | Denmark     | 4,398,636        | GCA_002891665.1     | no                 |                                                                                                                                                                      |
+| P30        | Denmark     | 4,320,988        | GCA_002892205.1     | no                 |                                                                                                                                                                      |
+| P48        | Denmark     | 4,109,120        | GCA_002892265.1     | no                 | Adaptation   of Surface-Associated Bacteria to the Open Ocean: A Genomically Distinct   Subpopulation of Phaeobacter gallaeciensis Colonizes Pacific Mesozooplankton |
+| P51        | Denmark     | 4,124,503        | GCA_002891985.1     | no                 |                                                                                                                                                                      |
+| P54        | Denmark     | 4,248,079        | GCA_002892185.1     | no                 |                                                                                                                                                                      |
+| P57        | Denmark     | 4,021,447        | GCA_002892005.1     | no                 | Adaptation   of Surface-Associated Bacteria to the Open Ocean: A Genomically Distinct   Subpopulation of Phaeobacter gallaeciensis Colonizes Pacific Mesozooplankton |
+| P59        | Denmark     | 4,103,784        | GCA_002892165.1     | no                 | Clustered Core-   and Pan-Genome Content on Rhodobacteraceae Chromosomes                                                                                             |
+| P66        | Spain       | 4,777,546        | GCA_002892065.1     | no                 |                                                                                                                                                                      |
+| P70        | Spain       | 4,479,933        | GCA_002892125.1     | no                 |                                                                                                                                                                      |
+| P72        | Spain       | 4,429,187        | GCA_002891945.1     | no                 |                                                                                                                                                                      |
+| P74        | Spain       | 4,481,611        | GCA_002892045.1     | no                 |                                                                                                                                                                      |
+| P78        | Spain       | 4,268,701        | GCA_002891965.1     | no                 |                                                                                                                                                                      |
+| P80        | Spain       | 4,695,825        | GCA_002892145.1     | no                 |                                                                                                                                                                      |
+| P83        | Spain       | 4,648,923        | GCA_002892225.1     | no                 |                                                                                                                                                                      |
+| P88        | Spain       | 4,844,543        | GCA_002892085.1     | no                 |                                                                                                                                                                      |
+| P92        | Spain       | 4,479,935        | GCA_002892025.1     | no                 |                                                                                                                                                                      |
+| S4Sm       | RI USA      | 4,385,166        | GCA_030060455.1     | yes                |                                                                                                                                                                      |
 
 # Run SibeliaZ to create syntny blocks
 Order of flags is important and should be entered in this order
@@ -71,10 +72,6 @@ Order of flags is important and should be entered in this order
 sibeliaz -k 15  -a 201 -t $threads -n $INPUT_DIR/*
 ```
 
-# Run maf2synteny to align blocks from SibeliaZ output
-```bash
-maf2synteny sibeliaz_out/blocks_coords.gff
-```
 # Re-run SibeliaZ with a higher -a interger
 Increasing the -a flag value to include a larger number of verticies. From the SibeliaZ page
 "SibeliaZ removes all k-mers with frequency more than a threshold, which is controlled by the option: -a <integer> We recommend setting it to twice the maximum number of copies of a homologous block the underlying input genome collection has."
@@ -90,7 +87,7 @@ Following this equation, an -a of 201 would suggest duplications of a little ove
 sibeliaz -k 15  -a 2000 -t $threads -n $INPUT_DIR/*
 ```
 
-## Output
+### Output
 SibeliaZ run with -a 201
 Blocks found: 7120
 Coverage: 0.98
@@ -98,6 +95,17 @@ Coverage: 0.98
 SibeliaZ run with -a 2000
 Blocks found: 7167
 Coverage: 0.98
+
+## Run SibeliaZ with Alignment
+Ran alignment alone to create a Multiple Alignmment file for downstream analysis
+
+```bash
+sibeliaz -k 15  -a 2000 -t $threads $INPUT_DIR/*
+```
+
+### Output
+
+/home/jcoppersmith/data/src/phaeobacter_comparison_2023/sibeliaZ_a2000/alignment/sibeliaz_out/alignment.maf
 
 # Core Genome Analysis with PanACoTA
 Following the pipeline as described in detail https://aperrin.pages.pasteur.fr/pipeline_annotation/html-doc/usage.html#
@@ -281,7 +289,9 @@ PanACoTA align -c $PERS_GENOME -l $LIST_FILE -n PHIN37_0.9 -d $DB_DIR -o $OUT_DI
 PanACoTA tree -a $ALIGN_FILE -o $OUT_DIR --boot 1000 --threads $threads
 ```
 
-## Output
+### Output
 Output tree file can be viewed using a number of tools, including http://etetoolkit.org/treeview/ as used to visualize this tree.
 
-![ProbiontPhylogeneticTree](output/panacota/Probiont_Subset_tree.png) 
+![ProbiontPhylogeneticTree](output/panacota/Probiont_Subset_tree.png)
+
+Reran the subset scripts but included an outgroup, M624. This is the resulting tree.
